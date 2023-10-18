@@ -1,11 +1,9 @@
 package org.example;
-package org.leapyear;
+
+import org.leapyear.LeapYearCalculator;
 
 public class Main {
   public static void main(String[] args) {
-    testLeapYear();
-    testNonLeapYear();
-    testOutOfRangeYear();
     System.out.println("Hello world!");
   }
 }
