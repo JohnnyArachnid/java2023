@@ -1,9 +1,9 @@
 package org.studentresource;
 
-public class Course implements StudentResource {
+public class StudyMaterial implements StudentResource{
     private String id;
     private String name;
-    public Course(String id, String name){
+    public StudyMaterial(String id, String name){
         this.id = id;
         this.name = name;
     }
@@ -15,7 +15,4 @@ public class Course implements StudentResource {
     public void setId(String id){ this.id = id; }
     @Override
     public void setName(String name){ this.name = name; }
-
-    // Constructor, getters, setters
-    // Implement all necessary methods from StudentResource
 }
