@@ -11,6 +11,22 @@ public class Product {
         this.price = price;
     }
 
+    public int getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public double getPrice() {
+        return this.price;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{id=" + getId() + ", name='" + getName() + "', price=" + getPrice() + "}";
+    }
 
     // Getters and toString() method, see: src/test/java/org/simplestore/model/ProductTest.java
     // TODO: Implement getters for id, name, and price

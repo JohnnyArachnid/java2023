@@ -22,20 +22,20 @@ class ShoppingCartTest {
     }
 
     @Test
-    void addItem_ShouldAddProductToCart() {
+    void addItem_ShouldAddProductToCart() throws ProductNotFoundException {
         shoppingCart.addItem(1, 1);
         assertEquals(1, shoppingCart.getItemQuantity(1), "Cart should have 1 item of product ID 1");
     }
 
     @Test
-    void removeItem_ShouldRemoveProductFromCart() {
+    void removeItem_ShouldRemoveProductFromCart() throws ProductNotFoundException {
         shoppingCart.addItem(1, 2);
         shoppingCart.removeItem(1, 1);
         assertEquals(1, shoppingCart.getItemQuantity(1), "Cart should have 1 item of product ID 1 after removal");
     }
 
     @Test
-    void clearCart_ShouldEmptyTheCart() {
+    void clearCart_ShouldEmptyTheCart() throws ProductNotFoundException {
         shoppingCart.addItem(1, 1);
         shoppingCart.clearCart();
         assertEquals(0, shoppingCart.getItemQuantity(1), "Cart should be empty after clearCart is called");
@@ -49,13 +49,13 @@ class ShoppingCartTest {
     }
 
     @Test
-    void calculateTotalCost_WithInvalidProductId_ShouldThrowException() {
+    void calculateTotalCost_WithInvalidProductId_ShouldThrowException() throws ProductNotFoundException {
         shoppingCart.addItem(999, 1);
         assertThrows(ProductNotFoundException.class, shoppingCart::calculateTotalCost);
     }
 
     @Test
-    void getItemQuantity_ShouldReturnCorrectQuantity() {
+    void getItemQuantity_ShouldReturnCorrectQuantity() throws ProductNotFoundException {
         shoppingCart.addItem(1, 3);
         shoppingCart.addItem(2, 2);
         assertEquals(3, shoppingCart.getItemQuantity(1), "Quantity for product ID 1 should be correct");

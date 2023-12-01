@@ -42,7 +42,7 @@ class InventoryTest {
     }
 
     @Test
-    void removeProduct() {
+    void removeProduct() throws ProductNotFoundException {
         inventory.removeProduct(1);
         assertThrows(ProductNotFoundException.class, () -> inventory.getProduct(1), "Product1 should be removed and not found");
     }
