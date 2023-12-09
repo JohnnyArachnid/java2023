@@ -17,12 +17,20 @@ public class StarMapController {
         this.constellations = DataLoader.loadConstellations(dataFilePath, stars);
     }
 
+    public StarMapController(List<Star> stars, List<Constellation> constellations) {
+        this.stars = stars;
+        this.constellations = constellations;
+    }
+
     public List<Star> getStars() {
         return stars;
     }
 
     public void setStars(List<Star> stars) {
         this.stars = stars;
+    }
+    public void setStarsByFile(String dataFilePath) {
+        this.stars = DataLoader.loadStars(dataFilePath);
     }
 
     public List<Constellation> getConstellations() {
@@ -31,6 +39,9 @@ public class StarMapController {
 
     public void setConstellations(List<Constellation> constellations) {
         this.constellations = constellations;
+    }
+    public void setConstellationsByFile(String dataFilePath) {
+        DataLoader.loadConstellations(dataFilePath, this.stars);
     }
 
     // Get a star by its name

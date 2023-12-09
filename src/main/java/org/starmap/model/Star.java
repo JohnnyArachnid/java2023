@@ -2,10 +2,10 @@ package org.starmap.model;
 
 // Represents a star in the star map
 public class Star {
-    final private String name;
-    final private double xPosition;
-    final private double yPosition;
-    final private double brightness;
+    private String name;
+    private double xPosition;
+    private double yPosition;
+    private double brightness;
 
     public Star(String name, double xPosition, double yPosition, double brightness) {
         this.name = name;
@@ -23,11 +23,26 @@ public class Star {
         return xPosition;
     }
 
+    public void setxPosition(double x) {
+        this.xPosition = x;
+    }
+
     public double getYPosition() {
         return yPosition;
+    }
+
+    public void setyPosition(double y) {
+        this.yPosition = y;
     }
 
     public double getBrightness() {
         return brightness;
     }
+
+    public void setBrightness(double Britghness) {this.brightness = Britghness;}
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

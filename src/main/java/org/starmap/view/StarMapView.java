@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class StarMapView extends Canvas {
-    private final StarMapController controller;
+    private StarMapController controller;
     private PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
     private Star currentHoveredStar = null;
     private Map<String, Color> constellationColors = new HashMap<>();
@@ -30,7 +30,7 @@ public class StarMapView extends Canvas {
         addMouseMotionListener();
     }
 
-    private void initializeConstellationColors() {
+    public void initializeConstellationColors() {
         List<Constellation> constellations = controller.getConstellations();
         for (Constellation constellation : constellations) {
             int hash = constellation.getName().hashCode();
@@ -38,6 +38,13 @@ public class StarMapView extends Canvas {
             Color color = new Color(rand.nextDouble(), rand.nextDouble(), rand.nextDouble(), 1);
             constellationColors.put(constellation.getName(), color);
         }
+    }
+
+    public StarMapController getController(){
+        return controller;
+    }
+    public void setController(StarMapController controller) {
+        this.controller = controller;
     }
 
     public void drawMap() {
@@ -48,7 +55,7 @@ public class StarMapView extends Canvas {
         drawConstellations();
     }
 
-    private void drawStars() {
+    public void drawStars() {
         GraphicsContext gc = getGraphicsContext2D();
         List<Star> stars = controller.getStars();
         for (Star star : stars) {
@@ -72,7 +79,7 @@ public class StarMapView extends Canvas {
         gc.strokePolyline(xPoints, yPoints, 10);
     }
 
-    private void drawConstellations() {
+    public void drawConstellations() {
         GraphicsContext gc = getGraphicsContext2D();
         List<Constellation> constellations = controller.getConstellations();
 
