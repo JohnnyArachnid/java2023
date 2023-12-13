@@ -7,9 +7,10 @@ package org.projectmanagement;
 // Sygnatura funkcji i sam interfejs wymagają wykorzystania gneryków, które tu usunąłem.
 // Zastanów się, czy w intefejsie potrzebne jest ciało funkcji?
 
-public interface ProjectFilter {
+public interface ProjectFilter<T> {
 
-    // boolean filter(Project project, ... criteria) { ... }
+    public boolean filter(Project project, T criteria);
 }
+
 
 
