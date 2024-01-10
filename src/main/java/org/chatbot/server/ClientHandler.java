@@ -18,7 +18,7 @@ public class ClientHandler implements Runnable {
 
     public ClientHandler(Socket socket) throws IOException, SQLException {
         this.clientSocket = socket;
-        this.chatbotLogic = new ChatbotLogic(new DatabaseConnection("jdbc:mysql://localhost/chatbot_db", "chatbot-app", "I&l0veJ4v4!"));
+        this.chatbotLogic = new ChatbotLogic(new DatabaseConnection("jdbc:mysql://localhost:3306/chatbot_db", "chatbot-app", "fjbh124555b&jkkj@@232"));
     }
 
     @Override
@@ -33,9 +33,10 @@ public class ClientHandler implements Runnable {
             // TODO: Implementacja wysyłania wiadomości powitalnej i odbioru odpowiedzi od klienta
             //  oraz odbiór i przetwarzanie wiadomości od klienta
             String inputLine;
-            // while (...) {
-                // ...
-            // }
+            while ((inputLine = in.readLine()) != null) {
+                greeting = chatbotLogic.processInput(inputLine);
+                out.println(greeting.getMessage());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

@@ -25,19 +25,26 @@ public class ChatbotLogic {
             isFirstMessage = false;
             return new Response(ResponseType.WELCOME, ResponseType.WELCOME.getMessage());
         }
-
         try {
             if (input.equalsIgnoreCase(CommandConstants.RESERVE)) {
                 // Logika dodawania rezerwacji, symulowane, nie bierze pod uwagę rzeczywistych danych z wejścia
                 dbConnection.addReservation("Klient", "2023-01-01 19:00", 2);
                 return new Response(ResponseType.RESERVATION_SUCCESS, ResponseType.RESERVATION_SUCCESS.getMessage());
             }
-
+            //Show list of rows in database reservation
             if (input.equalsIgnoreCase(CommandConstants.SHOW_RESERVATIONS)) {
                 ResultSet rs = dbConnection.listReservations();
-                StringBuilder sb = new StringBuilder(ResponseType.RESERVATION_LIST.getMessage() + "\n");
+                StringBuilder sb = new StringBuilder(ResponseType.RESERVATION_LIST.getMessage() + " ");
                 // TODO Logika wyświetlania rezerwacji
                 // ...
+                while (rs.next()) {
+                    int reservationId = rs.getInt("id");
+                    String customerName = rs.getString("customer_name");
+                    String reservationTime = rs.getString("reservation_time");
+                    int numberOfGuests = rs.getInt("number_of_guests");
+                    String message = "id: " + reservationId + ", customer_name:" + customerName + ", reservation_time: " + reservationTime + ", number_of_guests: " + numberOfGuests + " ";
+                    sb.append(message);
+                }
                 rs.close();
                 return new Response(ResponseType.RESERVATION_LIST, sb.toString());
             }
@@ -57,13 +64,20 @@ public class ChatbotLogic {
                 }
             }
 
+            //Delete certain reservation
             if (input.startsWith(CommandConstants.DELETE_RESERVATION)) {
                 try {
                     // TODO: Implementacja usuwania rezerwacji - przeparsuj reservationId z odpowiedzi klienta
-                    // int reservationId = ...;
-                    pendingReservationId = reservationId;
-                    awaitingConfirmation = true;
-                    return new Response(ResponseType.CONFIRMATION_REQUEST, ResponseType.CONFIRMATION_REQUEST.getMessage(reservationId));
+                    int reservationId;
+                    input = input.replaceAll("\\D", "");
+                    if (!input.isEmpty()) {
+                        reservationId = Integer.parseInt(input);
+                        pendingReservationId = reservationId;
+                        awaitingConfirmation = true;
+                        return new Response(ResponseType.CONFIRMATION_REQUEST, ResponseType.CONFIRMATION_REQUEST.getMessage(reservationId));
+                    } else {
+                        return new Response(ResponseType.ERROR, ResponseType.ERROR.getMessage("Brak liczby całkowitej w podanej wiadomości"));
+                    }
                 } catch (NumberFormatException e) {
                     return new Response(ResponseType.INVALID_RESERVATION_ID_FORMAT, ResponseType.INVALID_RESERVATION_ID_FORMAT.getMessage());
                 }
