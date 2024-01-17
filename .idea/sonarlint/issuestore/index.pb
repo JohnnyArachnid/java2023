@@ -17,5 +17,3 @@ _
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 V
 &src/main/java/org/starmap/MainApp.java,7\6\76dc10e92ba0a5f0274bf5e11cf78e5f68dcf651
-f
-6src/main/java/org/starmap/model/ConstellationSave.java,b\6\b65eb2c5c3d6d1d39baeabc6affb7bf160bfee3e
