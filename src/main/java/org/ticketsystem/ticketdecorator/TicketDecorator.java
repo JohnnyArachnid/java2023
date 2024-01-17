@@ -4,20 +4,24 @@ import org.ticketsystem.Ticket;
 
 // TODO dokończ implementację dekoratora
 public abstract class TicketDecorator implements Ticket {
-    public Ticket ticket;
+    private Ticket decoratedTicket;
 
     public TicketDecorator(Ticket decoratedTicket) {
-        this.ticket = decoratedTicket;
-        // TODO zwraca udekorowany bilet
+        this.decoratedTicket = decoratedTicket;
     }
 
     public String getDescription() {
-        return ticket.getDescription();
+        return decoratedTicket.getDescription();
         // TODO zwraca opis udekorowanego biletu
     }
 
     public double getPrice() {
-        return ticket.getPrice();
+        return decoratedTicket.getPrice();
         // TODO zwraca opis udekorowanego biletu
+    }
+
+    public Ticket getDecoratedTicket() {
+        return decoratedTicket;
+        // TODO zwraca udekorowany bilet
     }
 }
