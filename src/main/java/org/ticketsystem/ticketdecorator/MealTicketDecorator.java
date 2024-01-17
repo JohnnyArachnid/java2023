@@ -7,6 +7,7 @@ public class MealTicketDecorator extends TicketDecorator {
     public MealTicketDecorator(Ticket ticket) {
         super(ticket);
     }
+
     public String getDescription() {
         return super.getDescription() + ", with Meal";
         // TODO dodaje ", with Meal" do opisu
